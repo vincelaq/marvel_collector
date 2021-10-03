@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from django.views import View
+from django.views.generic import DetailView
 from django.views.generic.base import TemplateView
+from django.views.generic.edit import CreateView
 from .models import Character
 
 # Create your views here.
@@ -9,6 +11,10 @@ class Home(TemplateView):
 
 class About(TemplateView):
     template_name = "about.html"
+
+class CharacterDetail(DetailView):
+    model = Character
+    template_name = "character_detail.html"
 
 class CharacterList(TemplateView):
     template_name = "character_list.html"
@@ -25,3 +31,9 @@ class CharacterList(TemplateView):
             context["characters"] = Character.objects.all()
             context["header"] = "Trending Characters"
         return context
+
+class CharacterCreate(CreateView):
+    model = Character
+    fields = ['name', 'real_name', 'img', 'bio', 'verified_hero']
+    template_name = "character_create.html"
+    success_url = "/characters/"
