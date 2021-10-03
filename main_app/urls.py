@@ -4,4 +4,7 @@ from . import views
 urlpatterns = [
     path('', views.Home.as_view(), name="home"),
     path('about/', views.About.as_view(), name="about"),
+
+    # Character Routes
+    path('characters/', views.CharacterList.as_view(), name="character_list"),
 ]
