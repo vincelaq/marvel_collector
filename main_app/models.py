@@ -15,3 +15,12 @@ class Character(models.Model):
 
     class Meta:
         ordering = ['name']
+
+class Power(models.Model):
+
+    title = models.CharField(max_length=100)
+    description = models.CharField(max_length=250)
+    character = models.ForeignKey(Character, on_delete=models.CASCADE, related_name="powers")
+
+    def __str__(self):
+        return self.title

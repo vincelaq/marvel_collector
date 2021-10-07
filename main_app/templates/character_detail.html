@@ -33,8 +33,56 @@
       </span>
     </a>
   </div>
+  <div class="detail__songs mb-5">
+    <h4 class="title is-4">Powers</h4>
+    
+    {% for power in character.powers.all %}
+    <div class="song">
+      <span>{{forloop.counter}}</span>
+      <span><b>{{power.title}}</b></span>
+      <span style="font-size: 12px;">{{power.description}}</span>
+    </div>
+		{% empty %}
+    <article class="message">
+      <div class="message-header">
+        <p>No Powers Available</p>
+      </div>
+    </article>
+
+    {% endfor %}
+    <br>
+    <form class="mb-5" action="{% url 'power_create' character.pk %}" method="post">
+      {% csrf_token %}
+      <div class="field has-addons">
+        <div style="width: 240px;" class="control">
+          <input
+            class="input"
+            type="text"
+            name="title"
+            placeholder="Power"
+            required
+          />
+        </div>
+        <div style="width: 550px;" class="control">
+          <input
+            class="input"
+            type="text"
+            name="description"
+            placeholder="Description"
+            min="1"
+            required
+          />
+        </div>
+        <div class="control">
+          <input style="background-color: darkred;" class="button is-primary" type="submit" value="Add Power" />
+        </div>
+      </div>
+    </form>
+
+  </div>
   <div class="detail__about">
     <h4 class="title is-4">About</h4>
+    <h6 class="title is-6">Real Name: {{character.real_name}}</h6>
     <p>{{character.bio}}</p>
   </div>
 </div>

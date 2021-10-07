@@ -1,10 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views import View
 from django.views.generic import DetailView
 from django.views.generic.base import TemplateView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse
-from .models import Character
+from .models import Character, Power
 
 # Create your views here.
 class Home(TemplateView):
@@ -53,3 +53,12 @@ class CharacterDelete(DeleteView):
     model = Character
     template_name = "character_delete_confirmation.html"
     success_url = "/characters/"
+
+class PowerCreate(View):
+
+    def post(self, request, pk):
+        title = request.POST.get("title")
+        description = request.POST.get("description")
+        character = Character.objects.get(pk=pk)
+        Power.objects.create(title=title, description=description, character=character)
+        return redirect('character_detail', pk=pk)

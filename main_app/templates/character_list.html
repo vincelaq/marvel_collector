@@ -18,7 +18,6 @@
     </div>
   </div>
   <a class="button is-dark" style="background-color: black;" href="{% url 'character_list' %}">Clear Search</a>
-  <a class="button is-dark" style="background-color: black;" href="{% url 'character_create' %}">Add Character</a>
 </form>
 <div class="gallery">
   {% for character in characters %}
@@ -35,6 +34,7 @@
     </div>
   </a>
   {% endfor %}
+  <a class="button is-dark" style="background-color: black;" href="{% url 'character_create' %}">Add Character</a>
 </div>
 
 {% endblock %}
