@@ -1,0 +1,81 @@
+{% extends 'base.html' %} 
+
+{% block title %}
+  {{team.title}}
+{% endblock %}
+
+{% block content %}
+
+<div class="detail__img">
+  <img src="{{team.img}}" alt="{{team.title}}" />
+</div>
+<div class="detail__name">
+  <h1 class="title">{{team.title}}</h1>
+</div>
+<div class="detail__container">
+  <div class="buttons">
+    <a href="{% url 'team_update' team.pk %}" class="button is-info">
+      <span class="icon">
+        <i class="fas fa-edit"></i>
+      </span>
+    </a>
+    <a href="{% url 'team_delete' team.pk %}" class="button is-danger">
+      <span class="icon">
+        <i class="fas fa-trash-alt"></i>
+      </span>
+    </a>
+  </div>
+
+  <div class="detail__about">
+    <h4 class="title is-4">About</h4>
+    <p>{{team.bio}}</p>
+  </div>
+
+  <br />
+  <br />
+  
+  <div class="detail__songs mb-5">
+    <h4 class="title is-4">Members</h4>
+    
+    {% for character in team.characters.all %}
+  
+      <div class="song">
+        <span>{{forloop.counter}}</span>
+        <span><b>{{character.name}}</b><span style="font-size: 12px; margin-left: 24px;">{{character.real_name}}</span></span>
+        <span style="width: 40px;">
+          <a
+            href="{% url 'character_detail' character.pk %}"
+            class="button is-info is-outlined"
+            style="width: 40px;"
+            >
+              <span class="icon is-small">
+                  <i class="fas fa-info"></i>
+              </span>
+          </a>
+        </span>
+        <span style="width: 40px;">
+          <a
+            href="{% url 'team_character_assoc' team.pk character.pk %}?assoc=remove"
+            class="button is-danger is-outlined"
+            style="width: 40px;"
+            >
+              <span class="icon is-small">
+                  <i class="fas fa-times"></i>
+              </span>
+          </a>
+        </span>
+      </div>
+  
+		{% empty %}
+    <article class="message">
+      <div class="message-header">
+        <p>No Members Available</p>
+      </div>
+    </article>
+
+    {% endfor %}
+    <br>
+  </div>
+</div>
+
+{% endblock %}

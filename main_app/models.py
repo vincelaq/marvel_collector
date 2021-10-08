@@ -24,3 +24,13 @@ class Power(models.Model):
 
     def __str__(self):
         return self.title
+
+class Team(models.Model):
+
+    title = models.CharField(max_length=100)
+    img = models.CharField(max_length=250, default=None)
+    bio = models.TextField(max_length=500, default=None)
+    characters = models.ManyToManyField(Character)
+
+    def __str__(self):
+        return self.title

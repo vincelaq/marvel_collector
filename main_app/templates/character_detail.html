@@ -83,7 +83,46 @@
   <div class="detail__about">
     <h4 class="title is-4">About</h4>
     <h6 class="title is-6">Real Name: {{character.real_name}}</h6>
+    <h6 class="title is-6">Team Affiliations: 
+      {% for team in charTeams %}
+        <span>{{ team.title }}</span>
+      {% endfor %}
+    </h6>
     <p>{{character.bio}}</p>
+  </div>
+  <br />
+  <br />
+  <div class="detail__about">
+    <h4 class="title is-4">Add {{character.name}} to:
+      <span>
+        <div class="dropdown">
+          <div class="dropdown-trigger">
+            <button
+              class="button"
+              aria-haspopup="true"
+              aria-controls="dropdown-menu"
+            >
+              <span>Add to Team</span>
+              <span class="icon is-small">
+                <i class="fas fa-angle-down" aria-hidden="true"></i>
+              </span>
+            </button>
+          </div>
+          <div class="dropdown-menu" id="dropdown-menu" role="menu">
+            <div class="dropdown-content">
+              {% for team in teams %}
+              <a
+                href="{% url 'team_character_assoc' team.pk character.pk %}?assoc=add"
+                class="dropdown-item"
+              >
+                {{team.title}}
+              </a>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      </span>
+    </h4>
   </div>
 </div>
 
