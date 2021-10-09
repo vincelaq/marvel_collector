@@ -13,25 +13,17 @@ class Home(TemplateView):
 class About(TemplateView):
     template_name = "about.html"
 
-# class CharacterDetail(DetailView):
-#     model = Character
-#     template_name = "character_detail.html"
+class CharacterDetail(View):
 
-#     def get_context_data(self, **kwargs):
-#         context = super().get_context_data(**kwargs)
-#         context["teams"] = Team.objects.all()
-#         return context
-
-def character_detail(request, pk):
-    character = Character.objects.get(id=pk)
-    teams = Team.objects.all()
-    charTeams = character.team_set.all() 
-
-    return render(request, 'character_detail.html', {
-        'teams': teams,
-        'character': character,
-        'charTeams': charTeams,
-    })
+    def get(self, request, pk):
+            character = Character.objects.get(id=pk)
+            teams = Team.objects.all()
+            charTeams = character.team_set.all() 
+            return render(request, 'character_detail.html', {
+                'teams': teams,
+                'character': character,
+                'charTeams': charTeams,
+            })
 
 class CharacterUpdate(UpdateView):
     model = Character
