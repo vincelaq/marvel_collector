@@ -25,15 +25,22 @@
               <span aria-hidden="true"></span>
             </a>
           </div>
-          <div class="navbar-menu navbar-end">
-            <a class="navbar-item" href="/about">About</a>
+          <div class="navbar-menu navbar-start">
+            <a class="navbar-item" href="{% url 'about' %}">About</a>
           </div>
+          {% if user.is_authenticated %}
           <div class="navbar-menu navbar-end">
-            <a class="navbar-item" href="/teams">Teams</a>
+              <span class="navbar-item">Welcome: {{user.username}}</span>
+              <a class="navbar-item" href="{% url 'character_list' %}">Characters</a>
+              <a class="navbar-item" href="{% url 'team_list' %}">Teams</a>
+              <a class="navbar-item" href="{% url 'logout' %}">Logout</a>
           </div>
+          {% else %}
           <div class="navbar-menu navbar-end">
-            <a class="navbar-item" href="/characters">Characters</a>
+             <a class="navbar-item" href="{% url 'login' %}">Log In</a>
+             <a class="navbar-item" href="{% url 'signup' %}">Sign Up</a>
           </div>
+          {% endif %}
         </nav>
         <div class="container">
 

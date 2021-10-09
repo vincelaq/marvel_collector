@@ -20,4 +20,7 @@ urlpatterns = [
     path('teams/<int:pk>/update', views.TeamUpdate.as_view(), name="team_update"),
     path('teams/<int:pk>/delete', views.TeamDelete.as_view(), name="team_delete"),
     path('teams/<int:pk>/characters/<int:character_pk>/', views.TeamCharacterAssoc.as_view(), name="team_character_assoc"),
+
+    # User Routes
+    path('accounts/signup/', views.Signup.as_view(), name="signup")
 ]
